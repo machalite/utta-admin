@@ -1,0 +1,208 @@
+footer{
+	background:#1c1d22;
+	color:#f0f0f0;
+}
+
+footer p{
+	padding:5px;
+}
+
+/* =============================================================================
+ICONS - COMMON
+============================================================================= */
+
+/**
+ * Icon common styles.
+ *
+ * Set it to block or inline block, whichever suits your needs. Overflow set to
+ * hidden for precautions, and make sure to set the font size to 0 and the text
+ * indent to -9999px. This allows us to actually include text in the markup
+ * which will be good for screen readers and accessibility purposes.
+ */
+
+.icon
+{
+	display: inline-block;
+	vertical-align: top;
+	overflow: hidden;
+	margin: 4px;
+	width: 50px;
+	height: 50px;
+	font-size: 0;
+	text-indent: -9999px;
+}
+
+/* =============================================================================
+ICONS - DEMO 5
+============================================================================= */
+
+.icon-cube
+{
+	position: relative;
+	-webkit-perspective: 800px;
+  	perspective: 800px;
+	overflow: visible;
+}
+
+
+
+.icon-cube::before,
+.icon-cube::after
+{
+
+	display: block;
+
+ 	position: absolute;
+
+ 	top: 0;
+
+	left: 0;
+
+ 	width: 100%;
+
+	height: 100%;
+
+ 	content: "";
+
+ 	-webkit-transition: all 0.3s;
+
+    	transition: all 0.3s;
+
+	background-size: 100%;
+}
+
+
+
+.icon-cube::before
+{
+
+	z-index: 2;
+
+ 	background-color: #1c1d22;
+
+}
+
+
+
+.icon-cube::after
+{
+
+	z-index: 1;
+
+	opacity: 0;
+
+	-webkit-transform: translateY(48px) rotateX(-90deg);
+
+     	transform: translateY(48px) rotateX(-90deg);
+
+}
+
+
+
+.icon-cube:hover::before
+{
+
+	opacity: 0;
+
+	-webkit-transform: translateY(-48px) rotateX(90deg);
+
+     	transform: translateY(-48px) rotateX(90deg);
+
+}
+
+.icon-cube:hover::after
+{
+
+ 	opacity: 1;
+
+	-webkit-transform: rotateX(0);
+
+  	transform: rotateX(0);
+
+}
+
+
+
+/* facebook */
+
+.icon-cube.facebook::before,
+.icon-cube.facebook::after
+{
+
+	background-image: url("../img/fb.png");
+
+
+}
+
+
+
+.icon-cube.facebook::after
+{
+
+	background-image: url("../img/fb2.png");
+
+}
+
+
+
+
+
+/* HME */
+
+.icon-cube.hme::before,
+.icon-cube.hme::after
+{
+
+	background-image: url("../img/hme.jpg");
+
+}
+
+
+
+.icon-cube.hme::after
+{
+
+	background-image: url("../img/hme.jpg");
+}
+
+
+
+/* instagram */
+
+.icon-cube.instagram::before,
+.icon-cube.instagram::after
+{
+
+	background-image: url("../img/ig.png");
+
+}
+
+
+
+.icon-cube.instagram::after
+{
+
+	background-image: url("../img/ig2.png");
+
+
+}
+
+
+
+/* youtube */
+
+.icon-cube.youtube::before,
+.icon-cube.youtube::after
+{
+
+	background-image: url("../img/youtube.png");
+
+}
+
+
+
+.icon-cube.youtube::after
+{
+
+	background-image: url("../img/youtube2.png");
+}

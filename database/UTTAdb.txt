@@ -1,0 +1,158 @@
+CREATE TABLE faculty
+(
+	id int AUTO_INCREMENT NOT NULL,
+  code varchar(10),
+  name varchar(50) NOT NULL,
+	active boolean DEFAULT 1,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE department
+(
+	id int AUTO_INCREMENT NOT NULL,
+  code varchar(10),
+  name varchar(50) NOT NULL,
+  faculty int,
+	active boolean DEFAULT 1,
+	PRIMARY KEY(id),
+  FOREIGN KEY(faculty) REFERENCES faculty(id)
+);
+
+CREATE TABLE lecturer
+(
+	id int AUTO_INCREMENT NOT NULL,
+  code varchar(20),
+  name varchar(50) NOT NULL,
+	active boolean DEFAULT 1,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE student
+(
+	id int AUTO_INCREMENT NOT NULL,
+  code varchar(20),
+  name varchar(50) NOT NULL,
+  department int,
+	active boolean DEFAULT 1,
+	lineid varchar (50),
+	authcode varchar(50),
+	PRIMARY KEY(id),
+  FOREIGN KEY(department) REFERENCES department(id)
+);
+
+CREATE TABLE building
+(
+	id int AUTO_INCREMENT NOT NULL,
+  name varchar(50) NOT NULL,
+  description text,
+	active boolean DEFAULT 1,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE room
+(
+	id int AUTO_INCREMENT NOT NULL,
+  code varchar(10),
+  name varchar(50) NOT NULL,
+  building int,
+  floor varchar(5),
+	description text,
+	active boolean DEFAULT 1,
+	PRIMARY KEY(id),
+  FOREIGN KEY(building) REFERENCES building(id)
+);
+
+CREATE TABLE year
+(
+	id int AUTO_INCREMENT NOT NULL,
+  name varchar(50) NOT NULL,
+  startdate date NOT NULL,
+	enddate date NOT NULL,
+	active boolean DEFAULT 1,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE course
+(
+	id int AUTO_INCREMENT NOT NULL,
+  code varchar(20),
+  name varchar(50) NOT NULL,
+  department int,
+  lecturer int,
+	active boolean DEFAULT 1,
+	PRIMARY KEY(id),
+  FOREIGN KEY(department) REFERENCES department(id),
+  FOREIGN KEY(lecturer) REFERENCES lecturer(id)
+);
+
+CREATE TABLE class
+(
+	id int AUTO_INCREMENT NOT NULL,
+  day int NOT NULL,
+  startclass time NOT NULL,
+	endclass time NOT NULL,
+	year int,
+  course int,
+  room int,
+	active boolean DEFAULT 1,
+	PRIMARY KEY(id),
+	FOREIGN KEY(year) REFERENCES year(id),
+  FOREIGN KEY(course) REFERENCES course(id),
+  FOREIGN KEY(room) REFERENCES room(id)
+);
+
+CREATE TABLE user
+(
+	id int AUTO_INCREMENT NOT NULL,
+	username varchar(50) NOT NULL,
+	password varchar(50) NOT NULL,
+	lastlogin datetime,
+	active boolean DEFAULT 1,
+	PRIMARY KEY(id)
+);
+
+CREATE TABLE activitylog
+(
+	id int AUTO_INCREMENT NOT NULL,
+	user int,
+	activity varchar(100),
+	timestamp datetime DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(id),
+	FOREIGN KEY(user) REFERENCES user(id)
+);
+
+CREATE TABLE usagelog
+(
+	id int AUTO_INCREMENT NOT NULL,
+	student int,
+	activity int,
+	timestamp datetime DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY(id),
+	FOREIGN KEY(student) REFERENCES student(id)
+);
+
+CREATE TABLE offclass
+(
+	id int AUTO_INCREMENT NOT NULL,
+	class int,
+  status int,
+	startclass time,
+	endclass time,
+	description text,
+	date date,
+  room int,
+	active boolean DEFAULT 1,
+	PRIMARY KEY(id),
+	FOREIGN KEY(class) REFERENCES class(id),
+  FOREIGN KEY(room) REFERENCES room(id)
+);
+
+CREATE TABLE takencourse
+(
+	id int AUTO_INCREMENT NOT NULL,
+	course int,
+	student int,
+	PRIMARY KEY(id),
+	FOREIGN KEY(course) REFERENCES course(id),
+  FOREIGN KEY(student) REFERENCES student(id)
+);
